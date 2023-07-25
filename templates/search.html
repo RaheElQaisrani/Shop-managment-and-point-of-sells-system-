@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}search{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  	   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/vendor/select2-4.0.10/css/select2.min.css')}}">
+       <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" /> -->
+       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/search.css')}}">
+
+
+
+       <style>
+         body {
+           background-color: #858585;
+           /* display: flex;
+           justify-content: center;
+           align-items: center;
+           height: 100vh; */
+         }
+         .container-fluid {
+
+           margin-top: 70px;
+         }
+         #search-container {
+
+           width: 50%;
+           text-align: center;
+           background-color: #D6D6D6;
+           padding: 20px;
+           border-radius: 5px;
+           box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+         }
+         #search-input {
+           width: 100%;
+           margin-top: 10px;
+         }
+         .select2-container--default .select2-selection--single {
+           border: 1px solid #ccc;
+           border-radius: 0;
+           height: 36px;
+         }
+         .select2-container--default .select2-selection--single .select2-selection__arrow {
+           height: 34px;
+         }
+       </style>
+        {% endblock %}
+{% block content %}
+
+     </head>
+     <body>
+
+
+      <center> <div id="search-container">
+       <h1>Search for a product</h1>
+       <select id="search-input"></select>
+     </div></center>
+      <script type="text/javascript" src="{{ url_for('static', filename='assets/vendor/jquery/jquery-3.6.4.js') }}"></script>
+       <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+       <script type="text/javascript" src="{{ url_for('static', filename='assets/vendor/select2-4.0.10/js/select2.min.js') }}"></script>
+       <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script> -->
+       <script type="text/javascript" src="{{ url_for('static', filename='datatable/search.js') }}"></script>
+       {% endblock %}

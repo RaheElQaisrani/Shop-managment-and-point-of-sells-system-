@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}Update{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div id="flash-container">
+      <div id="flash-message" class="alert alert-success">{{ messages[0] }}</div>
+    </div>
+  {% endif %}
+{% endwith %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/Homepage.css') }}">
+<div class="container">
+  <div class="left">
+    <form method="POST" action="{{ url_for('update', Sno=product.Sno) }}">
+      <h1>Create a New Product</h1>
+    <input type="hidden" name="Sno" value="{{ product.Sno }}">
+
+      <div class="form-group">
+        <label for="type">Thing:</label><br>
+        <input type="text" id="type" name="Type"value="{{product.type}}" placeholder="{{ user }}"required><br>
+      </div>
+
+      <div class="form-group">
+        <label for="title">Brand:</label><br>
+        <input type="text" id="title" name="title"value="{{product.title}}" placeholder="Brand Name"required><br>
+      </div>
+
+      <div class="form-group">
+        <label for="title2">Model:</label><br>
+        <input type="text" id="title2" name="title2"value="{{product.title2}}" placeholder="Model"required><br>
+      </div>
+
+      <div class="form-group">
+    <label for="title3">Further details:</label><br>
+    <textarea id="title3" name="title3" {{product.title3}} placeholder="Further Detail">{{product.title3}}</textarea>
+    </div>
+
+
+      <div class="form-group">
+        <label for="price">Price:</label><br>
+        <input type="number" id="purchesepr" name="purchesepr"value="{{product.purchesepr}}" placeholder="Purchase Price" maxlength="10"min="0" size="20"required>
+      </div>
+
+      <div class="form-group">
+        <input type="number" id="retailpr" name="retailpr" value="{{product.retailpr}}"placeholder="Retail Price" maxlength="10"min="0" size="20"required>
+      </div>
+
+      <div class="form-group">
+        <input type="number" id="wholepr" name="wholepr"value="{{product.wholepr}}" placeholder="Wholesale Price" maxlength="10"min="0" size="20"required>
+      </div>
+
+
+
+  </div>
+
+  <div class="right">
+
+      <table>
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for l in loc %}
+          <tr>
+            <td>{{ l.locationName }}</td>
+            <td><input type="number" name="qty_{{ l.LocationID }}" value="{{ current_qty[loop.index0] }}"min="0" placeholder=""required></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="button-container">
+
+
+
+
+      <input type="submit" value="Update" class="btn btn-primary">
+      <a href="/logout">
+        <input type="button" value="Logout" class="btn btn-danger">
+      </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+ <!-- <script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='zero.js') }}"></script>  -->
+{% endblock %}

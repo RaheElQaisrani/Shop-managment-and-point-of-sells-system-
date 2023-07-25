@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <!-- Custom styles for this page -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='datatable/datatables.css')}}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/bootstrap/css/bootstrap.min.css')}}">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/a/datatables.min.css')}}"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"/> -->
+
+
+  <div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+      <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">DataTables</h6>
+      </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                      <thead>
+                        <tr>
+                          <th>Sno</th>
+                          <th>Type</th>
+                          <th>Company</th>
+                          <th>Name</th>
+                          <th>S-Number</th>
+                          <th>Purchase price</th>
+                          <th>Retail price</th>
+                          <th>Wholesale price</th>
+                          {% for location in locations %}
+                          <th>{{ location.locationName }}</th>
+                          {% endfor %}
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tfoot>
+                        <tr>
+                          <th>Sno</th>
+                          <th>Type</th>
+                          <th>Company</th>
+                          <th>Name</th>
+                          <th>S-Number</th>
+                          <th>Purchase price</th>
+                          <th>Retail price</th>
+                          <th>Wholesale price</th>
+                          {% for location in locations %}
+                          <th>{{ location.locationName }}</th>
+                          {% endfor %}
+                          <th>Actions</th>
+                        </tr>
+</tfoot>
+  <tbody>
+    {% for row in values %}
+<tr>
+<td>{{ row['Sno'] }}</td>
+<td>{{ row['Type'] }}</td>
+<td>{{ row['Company'] }}</td>
+<td>{{ row['Name'] }}</td>
+<td>{{ row['S-Number'] }}</td>
+<td>{{ row['Purchase price'] }}</td>
+<td>{{ row['Retail price'] }}</td>
+<td>{{ row['Wholesale price'] }}</td>
+{% for location in locations %}
+<td>{{ row[location.locationName] }}</td>
+{% endfor %}
+<td><a href="/delete/{{ row['Sno'] }}">Delete {{ row['Sno'] }}</a></td>
+</tr>
+{% endfor %}
+                  </tbody>
+
+
+                    </tr>
+
+            </table>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page level plugins -->
+  <!-- <script src="{{ url_for('static', filename='assets/vendor/a/jquery.datatables.min.js')}}"></script> -->
+  <!-- <script src="{{ url_for('static', filename='assets/vendor/a/jquery.datatables.js')}}"></script>  -->
+  <!-- <script src="{{ url_for('static', filename='assets/a/datatables.js')}}"></script> -->
+  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script> -->
+<!-- <script>
+  $(document).ready(function() {
+    $('dataTable').DataTable();
+  });
+</script> -->
+  <script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='datatable/jquery-3.2.1.min.js')}}"></script>
+  <!-- <script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='datatable/jquery.dataTables.js')}}"></script> -->
+  <script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='datatable/datatables.js')}}"></script>
+  <script type="text/javascript"charset="utf8" src="{{ url_for('static', filename='datatable/datatables-demo.js')}}"></script>
+
+
+</html>

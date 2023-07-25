@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Add Customer{% endblock %}
+
+{% block head %}
+  {{ super() }}
+    <!-- Custom styles for this page -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets//css/add_customer.css')}}">
+{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div id="flash-container">
+      <div id="flash-message" class="alert alert-success">{{ messages[0] }}</div>
+    </div>
+  {% endif %}
+{% endwith %}
+
+  <div class="container">
+    <h1>Add Customer</h1>
+    <form action="{{ url_for('sales.add_customer') }}" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone"maxlength="11" autocomplete="off" required>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address"></textarea>
+
+        <label for="cnic">CNIC Number:</label>
+        <input type="number" id="cnic" name="cnic" minlength="11" maxlength="11" autocomplete="off" required>
+
+        <label for="debit">Debit:</label>
+        <input type="number" id="debit" name="debit" value="0">
+
+        <label for="credit">Credit:</label>
+        <input type="number" id="credit" name="credit" value="0">
+
+        <label for="reference">Reference:</label>
+        <input type="text" id="reference" name="reference">
+
+        <label for="detail">Detail:</label>
+        <textarea id="detail" name="detail"></textarea>
+
+        <input type="submit" value="Add Customer">
+    </form>
+    </div>
+{% endblock %}

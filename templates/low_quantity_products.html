@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}low Quantity{% endblock %}
+
+{% block head %}
+  {{ super() }}
+    <!-- Custom styles for this page -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets//css/low_quantity_products.css')}}">
+{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div id="flash-container">
+      <div id="flash-message" class="alert alert-success">{{ messages[0] }}</div>
+    </div>
+  {% endif %}
+{% endwith %}
+
+    <h1>Products with Quantity less than 10</h1>
+    <table>
+  <thead>
+    <tr>
+      <th>Sno</th>
+      <th>Type</th>
+      <th>Title</th>
+      <th>Title 2</th>
+      <th>Title 3</th>
+      <th>Purchase Price</th>
+      <th>Retail Price</th>
+      <th>Wholesale Price</th>
+      <th>Quantity</th>
+      <th>Available Quantity</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for result in results %}
+      {% set product = result[0] %}
+      {% set qty = result[1] %}
+      <tr>
+        <td>{{ product.Sno }}</td>
+        <td>{{ product.type }}</td>
+        <td>{{ product.title }}</td>
+        <td>{{ product.title2 }}</td>
+        <td>{{ product.title3 }}</td>
+        <td>{{ product.purchesepr }}</td>
+        <td>{{ product.retailpr }}</td>
+        <td>{{ product.wholepr }}</td>
+        <td>{{ qty.Quantity }}</td>
+        <td>
+          <ul>
+        {% for loc in other_locations %}
+          {% set key = product.Sno ~ '_' ~ loc.LocationID %}
+          <li>{{ loc.locationName }}: {{ avail_qty.get(key, 0) }}</li>
+        {% endfor %}
+        </ul>
+        </td>
+        <td>
+          <form action="{{ url_for('low_quantity_products') }}" method="POST">
+            <input type="hidden" name="product_id" value="{{ product.Sno }}">
+            <input type="number" name="quantity" min="1" >
+            <select name="location">
+              {% for loc in other_locations %}
+                <option value="{{ loc.LocationID }}">{{ loc.locationName }}</option>
+              {% endfor %}
+            </select>
+            <button type="submit">Move</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+<!-- <script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='datatable/jquery.dataTables.js')}}"></script> -->
+
+
+
+{% endblock %}

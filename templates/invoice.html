@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Invoice</title>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/invoice.css')}}">
+	 <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/Favicon.ico')}}">
+	<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/awesomplete/awesomplete.css')}}"> -->
+ <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/vendor/select2-4.0.10/css/select2.min.css')}}">
+
+</head>
+<body>
+	<div class="invoice-container">
+	  <div class="header">
+	    <h1>{{Business.name}}</h1>
+	    <p id="invoice-number">Invoice #:</p>
+	    <p>Date: May 7, 2023</p>
+	  </div>
+	  <div class="customer-details">
+	    <div id="button-container">
+	      <button id="random-customer-button"class="customer-button">Use Random Customer</button>
+	      <button id="search-add-button"class="customer-button">Search or Add Customer</button>
+
+
+	    </div>
+	    <form id="customer-form" style="display: none;">
+	      <label for="search-input">Customer Name</label>
+	      <select id="search-input" name="search-input" style="width: 40%;"></select>
+	      <br>
+	      <label for="customer-phone-input">Phone Number</label>
+	      <input type="text" id="customer-phone-input" name="customer-phone-input" autocomplete="off" value="" minlength="11" maxlength="11">
+	      <br>
+	      <button type="submit">Save Customer</button>
+	    </form>
+	    <p id="customer-name"></p>
+	    <p id="customer-address"></p>
+	    <p id="customer-phone"></p>
+	    <p id="customer-debt"></p>
+	  </div>
+
+
+
+		<table>
+			<thead>
+				<tr>
+					<th>Product Name</th>
+					<th>Quantity</th>
+					<th>Unit price</th>
+					<th><button id="discount-toggle">Discount by %</button></th>
+					<th>Total Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr id="product-row">
+		      <td class="product-name-cell">
+		        <input type="text" class="search-input" placeholder="Search products" autocomplete="off">
+		        <ul class="search-results"></ul>
+		      </td>
+		      <td class="quantity-cell"><input type="number" class="quantity-input" value="1" min="1" autocomplete="off"></td>
+		      <td class="product-price"></td>
+		      <td class="discount-cell"><input type="text" class="discount" placeholder="Discount %" autocomplete="off"></td>
+		      <td class="total-price"></td>
+		    </tr>
+			</tbody>
+			<tfoot>
+	    <tr>
+	      <th colspan="3">Subtotal</th>
+	      <td id="subtotal-price" colspan="2"></td>
+	    </tr>
+	    <tr>
+	      <th colspan="3">Tax</th>
+	      <td id="tax-price" colspan="2"></td>
+	    </tr>
+	    <tr>
+	      <th colspan="3">Grand Total</th>
+	      <td id="grand-total-price" colspan="2"></td>
+	    </tr>
+	  </tfoot>
+		</table>
+		<button id="add-product-btn">Add Product</button>
+		<button id="other-invoice-btn">Open another Invoice</button>
+		<button id="pay" name= "pay">Pay</button>
+	</div>
+</body>
+      <script type="text/javascript" src="{{ url_for('static', filename='assets/vendor/jquery/jquery-3.6.4.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='assets/awesomplete/awesomplete.js')}}"></script> -->
+			<script type="text/javascript" src="{{ url_for('static', filename='assets/vendor/select2-4.0.10/js/select2.min.js') }}"></script>
+
+       <script type="text/javascript" src="{{ url_for('static', filename='assets/js/invoice1.js') }}"></script>
+
+</html>
