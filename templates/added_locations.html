@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Tables{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+
+    <div id="flash-container">
+      <div id="flash-message" class="alert alert-success">{{ messages[0] }}</div>
+    </div>
+  {% endif %}
+{% endwith %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='datatable/datatables.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/bootstrap/css/bootstrap.min.css')}}">
+<script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='datatable/jquery-3.2.1.min.js')}}"></script>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Location</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="locationTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Location ID</th>
+                        <th>Location Name</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table rows will be added here dynamically -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Location ID</th>
+                        <th>Location Name</th>
+                        
+                    </tr>
+                </tfoot>
+                    <script>
+                        
+                        $(document).ready(function () {
+    // Initialize DataTable
+    const table = $('#locationTable').DataTable({
+        columns: [
+            { data: 'locationID' },
+            { data: 'name' }
+        ]
+    });
+
+    // Make AJAX request to fetch JSON data
+    $.ajax({
+        url: '/api/added_Locations', // The Flask API endpoint
+        method: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data)
+            // Loop through JSON data and add to DataTable
+            data.locations.forEach(location => {
+                table.clear().rows.add(data.locations).draw();
+});
+        },
+        error: function (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+});
+
+ 
+                    </script>
+                
+            
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='datatable/jquery.dataTables.js')}}"></script> -->
+<script type="text/javascript" charset="utf8" src="{{ url_for('static', filename='datatable/datatables.js')}}"></script>
+<script type="text/javascript"charset="utf8" src="{{ url_for('static', filename='datatable/datatables-demo.js')}}"></script>
+
+
+{% endblock %}
+
+ 

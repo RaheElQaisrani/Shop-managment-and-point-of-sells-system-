@@ -1,0 +1,43 @@
+
+
+.container {
+    width: 80%; /* 80% of the screen width */
+    padding: 5%; /* 5% of the screen width */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    min-height: 70vh; /* Set a minimum height for the container */
+    overflow-y: auto; /* Add vertical scroll if content exceeds container height */
+}
+#locationForm {
+    width: 100%;
+}
+input[type="text"] {
+    font-size: 16px;
+    padding: 8px;
+    width: 65%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.buttons {
+margin-top: auto; /* Push buttons to the bottom */
+display: flex;
+flex-direction: column; /* Stack buttons vertically */
+justify-content: flex-end; /* Align buttons to the bottom */
+
+width: 100%;
+position: sticky; /* Keep buttons at the bottom */
+bottom: 0; /* Stick buttons to the bottom */
+}
+
+.buttons button {
+margin-top: 10px; /* Add some spacing between buttons */
+}
+
+

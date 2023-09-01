@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Manage locations{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div id="flash-container">
+      <div id="flash-message" class="alert alert-success">{{ messages[0] }}</div>
+    </div>
+  {% endif %}
+{% endwith %}
+     <title>Add Locations</title>
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/manage_locations.css') }}">
+
+       <script type="text/javascript" src="{{ url_for('static', filename='assets/js/manage_locations.js') }}"></script>
+
+  
+
+
+     <div class="container">
+         <h1>Add Locations</h1>
+         <form id="locationForm" action="/location" method="post" autocomplete="off">
+             <label for="LocationName1">Location Name 1:</label>
+             <input type="text" id="LocationName1" name="locations[]" placeholder="Enter Location Name">
+             <br>
+ 
+             <label for="LocationName2">Location Name 2:</label>
+             <input type="text" id="LocationName2" name="locations[]" placeholder="Enter Location Name">
+             <br>
+ 
+             <label for="LocationName3">Location Name 3:</label>
+             <input type="text" id="LocationName3" name="locations[]" placeholder="Enter Location Name">
+             <br>
+             <label for="LocationName3">Location Name 4:</label>
+             <input type="text" id="LocationName4" name="locations[]" placeholder="Enter Location Name">
+             <br>
+             <label for="LocationName3">Location Name 5:</label>
+             <input type="text" id="LocationName5" name="locations[]" placeholder="Enter Location Name">
+             <br>
+             <div class="buttons">
+             <br><br>
+             <input type="submit" value="Submit">
+            </div>
+         </form>
+     </div>
+     {% endblock %}
+
+ 

@@ -297,6 +297,54 @@ def delete_product(Sno):
 
     # Redirect the user to the main page.
     return redirect(url_for("showdata"))
+# defining a route that will let users enter/view/change locations 
+
+from flask import request, jsonify
+
+@app.route('/manage_locations', methods=["GET", "POST"])
+def manage_locations():
+    if request.method == "POST":
+        try:
+            data = request.get_json()  # Get JSON data from the request
+            locations_data = data.get("locations")  # Extract locations data from JSON
+
+            if locations_data:
+                # Assuming 'Location' is the model for your database table
+                for location_name in locations_data:
+                    new_location = locations(locationName=location_name)  # Create a new Location object
+                    db.session.add(new_location)  # Add the new location to the session
+
+                db.session.commit()  # Commit the changes to the database
+                print("done")
+
+                return render_template('added_location.html')
+            else:
+                return jsonify({"error": "No locations data provided"}), 400
+
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
+
+    elif request.method == "GET":
+        # Retrieve and return locations data
+        locat = db.session.query(locations).all()
+        print (locat)
+        return render_template("manage_locations.html")
+    
+    else:
+        return jsonify({"error": "Method not allowed"}), 405
+ 
+@app.route('/added_Locations', methods=["GET"])
+def added_locations():
+    
+    return render_template("added_locations.html")
+
+@app.route('/api/added_Locations', methods=["GET"])
+def api_added_locations():
+    locat = db.session.query(locations).all()
+    location_data = [{"locationID": location.LocationID, "name": location.locationName} for location in locat]
+    return jsonify({"locations": location_data})
+
+
 
 @app.route('/logout')
 def logout():

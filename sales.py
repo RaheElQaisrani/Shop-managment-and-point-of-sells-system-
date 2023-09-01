@@ -49,7 +49,7 @@ def one():
 @sales.route('/api/customers')
 def get_customers():
     search_term = request.args.get('term', '')
-    customers1 = customers.query.filter(customers.name.ilike(f'%{search_term}%')).all()
+    customers1 = customers.query.filter(customers.name.ilike(f'%{search_term}%'),customers.searchable==1).all()
 
     results = [{'id':customer.id,'name': customer.name, 'phone': customer.phone} for customer in customers1]
 

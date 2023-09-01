@@ -1,7 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
+{% extends "base.html" %}
+{% block title %}Tables{% endblock %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+
+    <div id="flash-container">
+      <div id="flash-message" class="alert alert-success">{{ messages[0] }}</div>
+    </div>
+  {% endif %}
+{% endwith %}
 	<title>Invoice</title>
 
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/invoice.css')}}">
@@ -9,8 +16,6 @@
 	<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/awesomplete/awesomplete.css')}}"> -->
  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/vendor/select2-4.0.10/css/select2.min.css')}}">
 
-</head>
-<body>
 	<div class="invoice-container">
 	  <div class="header">
 	    <h1>{{Business.name}}</h1>
@@ -82,11 +87,9 @@
 		<button id="other-invoice-btn">Open another Invoice</button>
 		<button id="pay" name= "pay">Pay</button>
 	</div>
-</body>
-      <script type="text/javascript" src="{{ url_for('static', filename='assets/vendor/jquery/jquery-3.6.4.js') }}"></script>
-<!-- <script src="{{ url_for('static', filename='assets/awesomplete/awesomplete.js')}}"></script> -->
-			<script type="text/javascript" src="{{ url_for('static', filename='assets/vendor/select2-4.0.10/js/select2.min.js') }}"></script>
 
-       <script type="text/javascript" src="{{ url_for('static', filename='assets/js/invoice1.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/vendor/jquery/jquery-3.6.4.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='assets/vendor/select2-4.0.10/js/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='assets/js/invoice1.js') }}"></script>
 
-</html>
+	{% endblock %}
